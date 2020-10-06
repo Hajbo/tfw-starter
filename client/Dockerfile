@@ -1,20 +1,15 @@
 # pull official base image
 FROM node:13.12.0-alpine
 
-# set working directory
-WORKDIR /client
-
-# add `/app/node_modules/.bin` to $PATH
-ENV PATH /starter-client/node_modules/.bin:$PATH
 
 # install app dependencies
-COPY package.json ./
-COPY package-lock.json ./
+COPY /starter-client /usr/src/starter-client
+
+WORKDIR /usr/src/starter-client
+
 RUN npm install
 RUN npm install react-scripts@3.4.1 -g
 
-# add app
-COPY . ./
 
 # start app
 CMD ["npm", "start"]

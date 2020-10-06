@@ -32,6 +32,8 @@ A templated and cleaned-up copy of the test-tutorial-framework should be stored.
 The React frontend fetches the selected language from the backend and warns the user when conflicting packages are selected. The UX and UI has to be figured out soon.
 Authorization trough Avatao is needed so we can verify the creators identity.
 
+Advanced view: user can add any package, but we won't guarantee that they work.
+
 ## Mandatory packages
 
 Avatao SDK, language specific

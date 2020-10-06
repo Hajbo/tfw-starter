@@ -8,18 +8,19 @@ services:
       context: ./backend/
       dockerfile: Dockerfile
     ports:
-      - "5000:80"
+      - "5000:5000"
     volumes:
       - ./backend:/usr/src/app
 
   client:
     container_name: starter-client
+    stdin_open: true
     build:
       context: ./client
       dockerfile: Dockerfile
     volumes:
-      - '.:starter-client'
-      - '/starter-client/node_modules'
+      - './:/starter-client'
+      - '/usr/src/starter-client/node_modules'
     ports:
       - '3000:3000'
     depends_on:
