@@ -1,0 +1,28 @@
+FROM avatao/baseimage-tutorial-framework
+
+# Define variables to use later
+ENV TFW_EHMAIN_DIR="${TFW_DIR}/builtin_event_handlers" \
+    TFW_WEBSERVICE_DIR="/srv/webservice"               \
+    TFW_IDE_WD="/home/${AVATAO_USER}/workdir"          \
+    TFW_TERMINADO_WD="/home/${AVATAO_USER}/workdir"
+
+# Copy TFW related stuff to a dedicated directory
+COPY solvable/src ${TFW_EHMAIN_DIR}/
+
+# Copy webservice to a dedicated directory
+COPY solvable/src/webservice/ ${TFW_WEBSERVICE_DIR}/
+ADD solvable/src/webservice/frontend-deps.tar ${TFW_WEBSERVICE_DIR}/static
+
+# Create IDE directory, symlink server source and give proper permissions to AVATAO_USER
+RUN mkdir -p ${TFW_IDE_WD}                                               &&\
+    chown -R ${AVATAO_USER}: "${TFW_IDE_WD}" "${TFW_WEBSERVICE_DIR}"     &&\
+    chmod -R 755 "${TFW_IDE_WD}" "${TFW_WEBSERVICE_DIR}"
+
+# Hide TFW related code from user
+RUN chown -R root:root ${TFW_SERVER_DIR} ${TFW_DIR} &&\
+    chmod -R 700 ${TFW_SERVER_DIR} ${TFW_DIR}
+
+# Make AVATAO_USER's home writeable and set it as WORKDIR
+# Make webservice directory writable
+VOLUME ["/home/${AVATAO_USER}", "${TFW_WEBSERVICE_DIR}"]
+WORKDIR /home/${AVATAO_USER}

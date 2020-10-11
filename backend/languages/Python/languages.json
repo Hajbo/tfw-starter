@@ -1,0 +1,10 @@
+{
+    "supported_languages": {
+        "Python": {
+            "frameworks": [
+                "Flask",
+                "Django"
+            ]
+        }
+    }
+}

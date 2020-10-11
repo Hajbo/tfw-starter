@@ -1,0 +1,44 @@
+# This defines an FSM equvivalent to test_fsm.py
+
+states:
+    -   name: '0'
+    -   name: '1'
+        on_enter: |
+            printf "Entered state 1!\n\n" > /tmp/tfw_bot_send
+    -   name: '2'
+        on_enter: |
+            file=/home/user/workdir/cat.txt
+            echo "As you can see it is possible to execute arbitrary shell commands here." >> $file
+            printf "Entered state 2! Written stuff to $file\n\n" > /tmp/tfw_bot_send
+    -   name: '3'
+        on_enter: |
+            printf "Entered state 3!\n\n" > /tmp/tfw_bot_send
+    -   name: '4'
+        on_enter: |
+            printf "Entered state 4!\n\n" > /tmp/tfw_bot_send
+    -   name: '5'
+        on_enter: |
+            printf "Entered state 5!\n\n" > /tmp/tfw_bot_send
+transitions:
+    -   trigger: step_1
+        source: '0'
+        dest: '1'
+    -   trigger: step_2
+        source: '1'      
+        dest: '2'
+    -   trigger: step_3
+        source: '2'
+        dest: '3'
+        predicates:
+            - '[ -f /home/user/workdir/allow_step_3 ]'  # in bash -f means that the file exists
+    -   trigger: step_4
+        source: '3'
+        dest: '4'
+    -   trigger: step_5
+        source: '4'
+        dest: '5'
+    {% for i in range(5) %}     # you can also use jinja2 in this config file
+    -   trigger: 'step_next'
+        source: '{{i}}'
+        dest: '{{i+1}}'
+    {% endfor %}

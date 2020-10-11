@@ -22,7 +22,7 @@ Jinja2 templates should be used to generate the needed files.
 A templated and cleaned-up copy of the test-tutorial-framework should be stored.
 
  * overwrite the webservice/ folder with the choosen language+framework starter app
- * generate the needed templates based on the config (Dockerfile, config.yml, etc.)
+ * generate the needed templates based on the config (Dockerfile, etc.)
  * zip it
  * send back
 
