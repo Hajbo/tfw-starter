@@ -2,8 +2,10 @@ from zipfile import ZipFile
 import shutil
 import os
 
+from utils import SingletonMeta
 
-class Assembler:
+
+class Assembler(metaclass=SingletonMeta):
     def __init__(self, language, framework):
         self._language = language
         self._framework = framework
