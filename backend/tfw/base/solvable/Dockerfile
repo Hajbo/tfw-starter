@@ -11,7 +11,6 @@ COPY solvable/src ${TFW_EHMAIN_DIR}/
 
 # Copy webservice to a dedicated directory
 COPY solvable/src/webservice/ ${TFW_WEBSERVICE_DIR}/
-ADD solvable/src/webservice/frontend-deps.tar ${TFW_WEBSERVICE_DIR}/static
 
 # Create IDE directory, symlink server source and give proper permissions to AVATAO_USER
 RUN mkdir -p ${TFW_IDE_WD}                                               &&\

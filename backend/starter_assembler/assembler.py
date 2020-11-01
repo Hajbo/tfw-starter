@@ -6,10 +6,6 @@ from utils import SingletonMeta
 
 
 class Assembler(metaclass=SingletonMeta):
-    def __init__(self, language, framework):
-        self._language = language
-        self._framework = framework
-
     @property
     def _tfw_starter_source_directory_full_path(self) -> str:
         return os.environ.get('TFW_STARTER_SOURCE_DIRECTORY')
@@ -33,7 +29,6 @@ class Assembler(metaclass=SingletonMeta):
         language_commands = '# Testing'
         framework_commands = 'pip3 install Flask'
 
-
     def generate_zip(self) -> ZipFile:
         self.__copy_to_working_directory()
         self.__generate_and_replace_template()
@@ -42,4 +37,3 @@ class Assembler(metaclass=SingletonMeta):
             'zip',
             self._tfw_starter_working_directory_full_path
         )
-    

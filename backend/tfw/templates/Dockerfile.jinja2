@@ -9,6 +9,9 @@ ENV TFW_EHMAIN_DIR="${TFW_DIR}/builtin_event_handlers" \
 # Copy TFW related stuff to a dedicated directory
 COPY solvable/src ${TFW_EHMAIN_DIR}/
 
+# Copy webservice to a dedicated directory
+COPY solvable/src/webservice/ ${TFW_WEBSERVICE_DIR}/
+
 # Language specific instructions
 {{ language_commands }}
 

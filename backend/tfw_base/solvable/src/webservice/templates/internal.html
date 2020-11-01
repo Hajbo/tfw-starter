@@ -1,9 +1,0 @@
-{% extends "base.html" %}
-
-{% block content %}
-<h2>Welcome, {{session.username}}</h2>
-<p>You have successfully logged in!</p>
-<a href="{{get_url('logout')}}" class="btn btn-default" >
-    <span class="glyphicon glyphicon-log-out"></span> Logout
-</a>
-{% endblock %}
