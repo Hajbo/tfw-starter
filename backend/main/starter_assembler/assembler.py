@@ -29,7 +29,7 @@ class Assembler(metaclass=SingletonMeta):
         language_commands = '# Testing'
         framework_commands = 'pip3 install Flask'
 
-    def generate_zip(self) -> ZipFile:
+    def __generate_zip(self) -> ZipFile:
         self.__copy_to_working_directory()
         self.__generate_and_replace_template()
         return shutil.make_archive(
