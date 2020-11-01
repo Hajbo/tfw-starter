@@ -1,4 +1,4 @@
-FROM avatao/baseimage-tutorial-framework
+FROM avatao/baseimage-tutorial-framework:chausie-20200701
 
 # Define variables to use later
 ENV TFW_EHMAIN_DIR="${TFW_DIR}/builtin_event_handlers" \
@@ -12,14 +12,16 @@ COPY solvable/src ${TFW_EHMAIN_DIR}/
 # Copy webservice to a dedicated directory
 COPY solvable/src/webservice/ ${TFW_WEBSERVICE_DIR}/
 
-# Language specific instructions
-{{ language_commands }}
-
-# Framework specific instructions
-{{ framework_commands }}
+# Custom commands
+{% if data %}
+    {% for command in data %}
+{{ command }}
+    {% endfor %}
+{% endif %}
 
 # Create IDE directory, symlink server source and give proper permissions to AVATAO_USER
 RUN mkdir -p ${TFW_IDE_WD}                                               &&\
+    echo "I'm just a placeholder" >> "${TFW_IDE_WD}/hello.txt"                         &&\
     chown -R ${AVATAO_USER}: "${TFW_IDE_WD}" "${TFW_WEBSERVICE_DIR}"     &&\
     chmod -R 755 "${TFW_IDE_WD}" "${TFW_WEBSERVICE_DIR}"
 

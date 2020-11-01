@@ -4,14 +4,14 @@ import json
 
 def get_supported_languages():
     return {
-        'supported_languages': [ f.path for f in os.scandir(os.environ.get('TFW_STARTER_LANGUAGE_TEMPLATES_DIRECTORY')) if f.is_dir() ]
+        'supported_languages': [ f.name for f in os.scandir(os.environ.get('TFW_STARTER_LANGUAGE_TEMPLATES_DIRECTORY')) if f.is_dir() ]
     }
 
 
 def get_supported_frameworks(language):
     return {
         'language': language,
-        'supported_framework': [ f.path for f in os.scandir(os.path.join(os.environ.get('TFW_STARTER_LANGUAGE_TEMPLATES_DIRECTORY'), language)) if f.is_dir() ]
+        'supported_framework': [ f.name for f in os.scandir(os.path.join(os.environ.get('TFW_STARTER_LANGUAGE_TEMPLATES_DIRECTORY'), language)) if f.is_dir() ]
     }
 
 
@@ -26,3 +26,4 @@ def get_supported_modules(language, framework):
         'language_modules': supported_language_modules,
         'framework_modules': supported_framework_modules
     }
+

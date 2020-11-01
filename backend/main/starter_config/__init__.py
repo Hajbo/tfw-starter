@@ -1,2 +1,2 @@
-from .dependency_manager_base import DependencyManagerBase
+from .language_config_base import LanguageConfigBase
 from .framework_config_base import FrameworkConfigBase

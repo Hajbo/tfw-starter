@@ -38,7 +38,7 @@ def main():
     ))
     # Web IDE backend
     ide_eh = eh_factory.build(IdeHandler(
-        patterns=['/home/user/workdir/*', '/srv/webservice/user_ops.py']
+        patterns=['/home/user/workdir/*']
     ))
     deploy_eh = eh_factory.build(DeployHandler())
     # Web shell backend
