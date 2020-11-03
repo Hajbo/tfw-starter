@@ -2,7 +2,7 @@ version: '3.7'
 
 services:
   backend:
-    container_name: flask-backend
+    container_name: starter-backend
     restart: always
     build:
       context: ./backend/
@@ -14,17 +14,16 @@ services:
 
   client:
     container_name: starter-client
-    stdin_open: true
+    restart: always
     build:
       context: ./client
       dockerfile: Dockerfile
     volumes:
-      - './:/starter-client'
-      - '/usr/src/starter-client/node_modules'
+      - ./:/usr/src/app
     ports:
       - '3000:3000'
-    depends_on:
-      - "backend"
-    environment:
-      - NODE_ENV=development
-      - CHOKIDAR_USEPOLLING=true
+    # depends_on:
+    #   - "backend"
+    # environment:
+    #   - NODE_ENV=development
+    #   - CHOKIDAR_USEPOLLING=true
