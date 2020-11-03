@@ -3,13 +3,10 @@ FROM node:13.12.0-alpine
 
 
 # install app dependencies
-COPY /starter-client /usr/src/starter-client
+COPY /starter /usr/src/starter
 
-WORKDIR /usr/src/starter-client
-
-RUN npm install
-RUN npm install react-scripts@3.4.1 -g
+WORKDIR /usr/src/starter
 
 
 # start app
-CMD ["npm", "start"]
+CMD ["npm", "run", "dev"]

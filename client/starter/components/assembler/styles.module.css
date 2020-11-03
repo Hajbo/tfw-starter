@@ -1,0 +1,9 @@
+.assembler {
+    display: flex;
+    flex-flow: row;
+    justify-content: space-evenly;
+    max-height: 60%;
+    width: 80%;
+    padding-top: 5%;
+    padding-bottom: 5%;
+}
