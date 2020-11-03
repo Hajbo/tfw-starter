@@ -1,0 +1,13 @@
+.picker-column{
+    display: flex;
+    flex-flow: column;
+    align-items: flex-start;
+    width: 20%;
+}
+
+.module-column{
+    display: flex;
+    flex-flow: column;
+    align-items: flex-start;
+    width: 30%;
+}
