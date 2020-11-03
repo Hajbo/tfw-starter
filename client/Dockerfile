@@ -3,9 +3,9 @@ FROM node:13.12.0-alpine
 
 
 # install app dependencies
-COPY /starter /usr/src/starter
+# COPY /starter /usr/src/starter
 
-WORKDIR /usr/src/starter
+WORKDIR /usr/src/client/starter
 
 
 # start app

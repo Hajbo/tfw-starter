@@ -11,7 +11,7 @@ def get_supported_languages():
 def get_supported_frameworks(language):
     return {
         'language': language,
-        'supported_framework': [ f.name for f in os.scandir(os.path.join(os.environ.get('TFW_STARTER_LANGUAGE_TEMPLATES_DIRECTORY'), language)) if f.is_dir() ]
+        'supported_frameworks': [ f.name for f in os.scandir(os.path.join(os.environ.get('TFW_STARTER_LANGUAGE_TEMPLATES_DIRECTORY'), language)) if f.is_dir() ]
     }
 
 
