@@ -19,11 +19,10 @@ def get_supported_modules(language, framework):
     with open(os.path.join(os.environ.get('TFW_STARTER_LANGUAGE_TEMPLATES_DIRECTORY'), f"{language}/supported_modules.json"), 'r') as language_modules:
         supported_language_modules = json.loads(language_modules.read())
 
-    with open(os.path.join(os.environ.get('TFW_STARTER_LANGUAGE_TEMPLATES_DIRECTORY'), f"{language}/{framework}/supported_modules.json"), 'r') as framework_modules:
-        supported_framework_modules = json.loads(framework_modules.read())
+    with open(os.path.join(os.environ.get('TFW_STARTER_LANGUAGE_TEMPLATES_DIRECTORY'), f"{language}/{framework}/required_modules.json"), 'r') as framework_modules:
+        required_framework_modules = json.loads(framework_modules.read())
     
-    return {
-        'language_modules': supported_language_modules,
-        'framework_modules': supported_framework_modules
-    }
+    supported_language_modules['modules']['mandatory'].extend(required_framework_modules.get('modules'))
+
+    return supported_language_modules
 
