@@ -19,7 +19,7 @@ class Assembler extends React.Component  {
         super(props);
         this.state = {
             languages: {
-                all: props.children,
+                all: props.languages,
                 selected: null
             },
             frameworks: {
@@ -39,32 +39,42 @@ class Assembler extends React.Component  {
     };
 
     handleLanguageSelect(selectedLanguage) {
-        this.setState({
-            languages: {
-                all: this.state.languages.all,
-                selected: selectedLanguage
-            },
-            frameworks: {
-                all: test, // Some magic fetch
-                selected: null
-            },
-            modules: this.state.modules
-        })
-    }
+        fetch(`http://localhost:5000/api/v1/languages/${selectedLanguage}`)
+            .then(res => res.json())
+            .then(res => {
+                this.setState({
+                    languages: {
+                        all: this.state.languages.all,
+                        selected: selectedLanguage
+                    },
+                    frameworks: {
+                        all: res.supported_frameworks, // Some magic fetch
+                        selected: null
+                    },
+                    modules: this.state.modules
+                })
+            })
+        }
+        
 
     handleFrameworkSelect(selectedFramework) {
-        this.setState({
-            languages: this.state.languages,
-            frameworks: {
-                all: this.state.frameworks.all,
-                selected: selectedFramework
-            },
-            modules: {
-                all: allModules.filter(module => !selectedModules.map(m => m.name).includes(module.name) ), // Some magic fetch
-                selected: selectedModules // Some magic fetch
-            }
-        })
+        fetch(`http://localhost:5000/api/v1/languages/${this.state.languages.selected}/${selectedFramework}`)
+            .then(res => res.json())
+            .then(res => {
+                this.setState({
+                    languages: this.state.languages,
+                    frameworks: {
+                        all: this.state.frameworks.all,
+                        selected: selectedFramework
+                    },
+                    modules: {
+                        all: res.modules.optional.filter(module => !res.modules.mandatory.map(m => m.name).includes(module.name) ), // Some magic fetch
+                        selected: res.modules.mandatory // Some magic fetch
+                    }
+                })
+            })
     }
+
 
     handleAddModule(toAdd) {
         console.log(toAdd);
@@ -94,7 +104,7 @@ class Assembler extends React.Component  {
             <div className={styles.assembler}>
                 <LanguageColumn 
                     children={this.state.languages.all} name='languages'
-                    onLanguageSelect={this.handleLanguageSelect}    
+                    onLanguageSelect={this.handleLanguageSelect}
                 />
                 <FrameworkColumn 
                     children={this.state.frameworks.all} name='frameworks'

@@ -1,4 +1,5 @@
 import React from "react"
+import classNames from "classnames"
 import styles from './styles.module.css'
 
 
@@ -15,8 +16,11 @@ class LanguageColumn extends React.Component {
 
     render() {
         return (
-            <div className={styles['picker-column']}>
-                {this.props.children ? this.props.children.map(language => <div> <input type="radio" value={language} name={this.props.name} onClick={this.handleSelect}/> {language} </div>) : 'Something went wrong 😨'}  
+            <div className={classNames(styles['language-column'], this.props.name)}>
+                {this.props.children ? this.props.children.map(language => <div className={styles.row} key={classNames(language, 'item')}> 
+                    <input type="radio" value={language} id={language} name={this.props.name} onClick={this.handleSelect}/> 
+                    <label for={language}>{language}</label>
+                    </div>) : 'Something went wrong 😨'}  
             </div>
         )
     }

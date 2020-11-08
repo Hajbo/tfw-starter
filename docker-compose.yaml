@@ -19,11 +19,12 @@ services:
       context: ./client
       dockerfile: Dockerfile
     volumes:
-      - ./:/usr/src/app
+      - ./client:/usr/src/client
     ports:
       - '3000:3000'
-    # depends_on:
-    #   - "backend"
-    # environment:
-    #   - NODE_ENV=development
-    #   - CHOKIDAR_USEPOLLING=true
+    depends_on:
+      - "backend"
+    environment:
+      - NODE_ENV=development
+      - CHOKIDAR_USEPOLLING=true
+

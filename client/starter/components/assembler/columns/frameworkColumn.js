@@ -1,4 +1,5 @@
 import React from "react"
+import classNames from "classnames"
 import styles from './styles.module.css'
 
 
@@ -15,8 +16,11 @@ class FrameworkColumn extends React.Component {
 
     render() {
         return (
-            <div className={styles['picker-column']}>
-                {this.props.children ? this.props.children.map(framework => <div> <input type="radio" value={framework} name={this.props.name} onClick={this.handleSelect}/> {framework} </div>) : 'Please select a language'}  
+            <div className={classNames(styles['framework-column'], this.props.name)}>
+                {this.props.children ? this.props.children.map(framework => <div className={styles.row} key={classNames(framework, 'item')}> 
+                    <input type="radio" value={framework} id={framework} name={this.props.name} onClick={this.handleSelect}/> 
+                    <label for={framework}>{framework}</label>
+                    </div>) : 'Please select a language'}  
             </div>
         )
     }
