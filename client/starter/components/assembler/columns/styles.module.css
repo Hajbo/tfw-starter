@@ -1,13 +1,115 @@
-.picker-column{
+.language-column{
     display: flex;
     flex-flow: column;
-    align-items: flex-start;
+    align-items: center;
     width: 20%;
+    margin: 0;
+    padding: 0;
 }
 
-.module-column{
+.language-column :nth-child(even) {
+    width: 100%;
+    background-color: #f2f5ff;
+  }
+
+.language-column :nth-child(odd) {
+    width: 100%;
+    background-color: #fcfcfc;
+}
+
+.framework-column{
     display: flex;
     flex-flow: column;
-    align-items: flex-start;
+    align-items: center;
+    width: 20%;
+    margin: 0;
+    padding: 0;
+    border-left: 1px solid rgb(0, 146, 247);
+}
+
+.framework-column :nth-child(odd) {
+    width: 100%;
+    background-color: #f2f5ff;
+  }
+
+.framework-column :nth-child(even) {
+    width: 100%;
+    background-color: #fcfcfc;
+}
+
+.module-column-selected{
+    display: flex;
+    flex-flow: column;
+    align-items: center;
     width: 30%;
+    border-left: 1px solid rgb(0, 146, 247);
+}
+
+.module-column-selected :nth-child(even) {
+    width: 100%;
+    background-color: #f2f5ff;
+  }
+
+.module-column-selected :nth-child(odd) {
+    width: 100%;
+    background-color: #fcfcfc;
+}
+
+
+.module-column-all {
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    width: 30%;
+    border-left: 1px solid rgb(0, 146, 247);
+}
+
+.module-column-all :nth-child(odd) {
+    width: 100%;
+    background-color: #f2f5ff;
+  }
+
+.module-column-all :nth-child(even) {
+    width: 100%;
+    background-color: #fcfcfc;
+}
+
+.row {
+    display: flex;
+    flex-flow: row;
+    justify-content: space-between;
+    height: 30px;
+    width: 100%;
+}
+
+.row > input[type=radio] {
+    width: auto !important;
+    text-align: left;
+}
+
+.row > label {
+    background-color:rgba(0, 0, 0, 0) !important;
+}
+
+.btn {
+    border: none;
+    color: DodgerBlue;
+    font-size: 16px;
+    cursor: pointer;
+    width: 30px !important;
+    background-color:rgba(0, 0, 0, 0) !important;
+  }
+  
+.btn:hover {
+    color: RoyalBlue !important;
+}
+
+.btn > i {
+    background-color:rgba(0, 0, 0, 0) !important;
+}
+
+.row-header {
+    width: calc(100% - 30px);
+    text-align: center;
+    background-color:rgba(0, 0, 0, 0) !important;
 }
