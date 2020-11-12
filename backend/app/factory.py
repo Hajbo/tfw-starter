@@ -17,4 +17,3 @@ def create_app(config_class=AppConfig):
     app.register_blueprint(api_v1_bp, url_prefix='/api/v1')
     
     return app
-
