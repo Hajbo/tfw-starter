@@ -11,8 +11,8 @@ class LanguageConfigBase(ABC):
         self._framework = framework
         self._framework_config = self.__init_framework_config(language, framework)
     
-    def __init_framework_config(self, language, framework):
-        return import_module(f'tfw.starters.{language}.{framework}.framework_config').FrameworkConfig()
+    def __init_framework_config(self, language_folder, framework_folder):
+        return import_module(f'tfw.starters.{language_folder}.{framework_folder}.framework_config').FrameworkConfig()
 
     @classmethod
     def __run_script(self, script_name):

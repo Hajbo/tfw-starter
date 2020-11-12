@@ -4,7 +4,9 @@ import os
 from functools import cached_property
 from importlib import import_module
 from utils import SingletonMeta, render_template
+from tfw.starters.utils import get_language_folder_by_name, get_framework_folder_by_name
 from .git_utils import init_starter_repo
+
 
 
 class Assembler(metaclass=SingletonMeta):
@@ -14,7 +16,9 @@ class Assembler(metaclass=SingletonMeta):
         self._zip_location = '/tmp/tfw-starter'
 
     def __init_language_config(self, language, framework):
-        self._language_config = import_module(f'tfw.starters.{language}.language_config').LanguageConfig(language, framework)
+        language_folder = get_language_folder_by_name(language)
+        framework_folder = get_framework_folder_by_name(language, framework)
+        self._language_config = import_module(f'tfw.starters.{language_folder}.language_config').LanguageConfig(language_folder, framework_folder)
 
     @cached_property
     def _tfw_starter_source_path(self) -> str:

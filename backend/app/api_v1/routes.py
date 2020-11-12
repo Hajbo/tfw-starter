@@ -1,16 +1,21 @@
 from flask import jsonify, request, current_app, send_file
 from app.api_v1 import bp
-from .utils import get_supported_languages, get_supported_frameworks, get_supported_modules
+from tfw.starters.utils import get_supported_language_names, get_framework_names_for_language, get_supported_modules
 
 
 @bp.route('/languages', methods=['GET'])
 def supported_languages():
-    return jsonify(get_supported_languages())
+    return jsonify({
+        'supported_languages': get_supported_language_names()
+    })
 
 
 @bp.route('/languages/<language>', methods=['GET'])
 def supported_frameworks(language):
-    return jsonify(get_supported_frameworks(language))
+    return jsonify({
+        'language': language,
+        'supported_frameworks': get_framework_names_for_language(language)
+    })
 
 
 @bp.route('/languages/<language>/<framework>', methods=['GET'])
