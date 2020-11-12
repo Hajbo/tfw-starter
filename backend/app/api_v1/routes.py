@@ -33,8 +33,8 @@ def assemble_starter():
 
 @bp.route('/test')
 def test_assemble():
-    language = 'Python'
-    framework = 'Flask'
+    language = 'python'
+    framework = 'flask'
     modules = [
         {'name': 'Flask', 'version': '1.1.2'},
         {'name': 'requests', 'version': '2.24.0'}

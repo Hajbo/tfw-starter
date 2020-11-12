@@ -1,5 +1,9 @@
 FROM python:3
 
+RUN apt-get update && \
+    apt-get upgrade -y && \
+    apt-get install -y git
+
 COPY . /usr/src/app
 
 WORKDIR /usr/src/app
@@ -20,5 +24,6 @@ ENV TFW_STARTER_SUPPORTED_LANGUAGES="${TFW_STARTER_LANGUAGE_TEMPLATES_DIRECTORY}
 
 
 RUN pip3 install -r requirements.txt
+
 
 CMD ["python", "server.py"]
