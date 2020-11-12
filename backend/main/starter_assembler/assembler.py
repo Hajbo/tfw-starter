@@ -1,6 +1,7 @@
 from zipfile import ZipFile
 import shutil
 import os
+import datetime
 from functools import cached_property
 from importlib import import_module
 from utils import SingletonMeta, render_template
@@ -13,12 +14,16 @@ class Assembler(metaclass=SingletonMeta):
 
     def __init__(self):
         self._language_config = None
-        self._zip_location = '/tmp/tfw-starter'
+        self._zip_base_name = '/tmp/tfw-starter'
 
     def __init_language_config(self, language, framework):
         language_folder = get_language_folder_by_name(language)
         framework_folder = get_framework_folder_by_name(language, framework)
         self._language_config = import_module(f'tfw.starters.{language_folder}.language_config').LanguageConfig(language_folder, framework_folder)
+    
+    @property
+    def _zip_name(self):
+        return f'{self._zip_base_name}-{datetime.datetime.now().strftime("%Y%m%d-%H%M%S")}'
 
     @cached_property
     def _tfw_starter_source_path(self) -> str:
@@ -66,7 +71,7 @@ class Assembler(metaclass=SingletonMeta):
 
     def __generate_zip(self) -> ZipFile:
         starter_zip = shutil.make_archive(
-            self._zip_location,
+            self._zip_name,
             'zip',
             self._tfw_starter_workdir_path
         )
