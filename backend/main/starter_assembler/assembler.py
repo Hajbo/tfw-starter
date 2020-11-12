@@ -4,12 +4,14 @@ import os
 from functools import cached_property
 from importlib import import_module
 from utils import SingletonMeta, render_template
+from .git_utils import init_starter_repo
 
 
 class Assembler(metaclass=SingletonMeta):
 
     def __init__(self):
         self._language_config = None
+        self._zip_location = '/tmp/tfw-starter'
 
     def __init_language_config(self, language, framework):
         self._language_config = import_module(f'tfw.starters.{language}.language_config').LanguageConfig(language, framework)
@@ -26,17 +28,19 @@ class Assembler(metaclass=SingletonMeta):
     def _tfw_starter_webservice_path(self):
         return os.environ.get('TFW_STARTER_WEBSERVICE_DESTINATION')
 
+    def __cleanup_directory(self, dir_path):
+        if os.path.exists(dir_path):
+            shutil.rmtree(dir_path)
+
     def __copy_base_to_working_directory(self) -> None:
-        if os.path.exists(self._tfw_starter_workdir_path):
-            shutil.rmtree(self._tfw_starter_workdir_path)
+        self.__cleanup_directory(self._tfw_starter_workdir_path)
         shutil.copytree(
             self._tfw_starter_source_path,
             self._tfw_starter_workdir_path
         )
 
     def __copy_language_template_to_working_directory(self, language, framework):
-        if os.path.exists(self._tfw_starter_webservice_path):
-            shutil.rmtree(self._tfw_starter_webservice_path)
+        self.__cleanup_directory(self._tfw_starter_webservice_path)
         shutil.copytree(
             os.path.join(os.environ.get('TFW_STARTER_LANGUAGE_TEMPLATES_DIRECTORY'), f'{language}/{framework}/app'),
             self._tfw_starter_webservice_path
@@ -58,14 +62,14 @@ class Assembler(metaclass=SingletonMeta):
 
     def __generate_zip(self) -> ZipFile:
         starter_zip = shutil.make_archive(
-            'tfw_starter',
+            self._zip_location,
             'zip',
             self._tfw_starter_workdir_path
         )
-        shutil.rmtree(self._tfw_starter_workdir_path) # Cleanup
+        self.__cleanup_directory(self._tfw_starter_workdir_path)
         return starter_zip
 
-    def assemble_and_zip_starter(self, language, framework, module_list):
+    def assemble_and_zip_starter(self, language, framework, module_list, git_user_name="startR", git_user_email="support@avatao.com"):
         self.__init_language_config(language, framework)
         # copy base
         self.__copy_base_to_working_directory()
@@ -77,4 +81,8 @@ class Assembler(metaclass=SingletonMeta):
         self.__template_dockerfile()
         # template supervisor
         self.__template_supervisor_config()
+        # init git repo
+        init_starter_repo(self._tfw_starter_workdir_path, git_user_name, git_user_email)
+        # zip
         return self.__generate_zip()
+        

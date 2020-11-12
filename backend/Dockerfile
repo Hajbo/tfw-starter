@@ -1,5 +1,9 @@
 FROM python:3
 
+RUN apt-get update && \
+    apt-get upgrade -y && \
+    apt-get install -y git
+
 COPY . /usr/src/app
 
 WORKDIR /usr/src/app
@@ -19,5 +23,6 @@ ENV TFW_STARTER_DOCKERFILE_SOURCE="${TFW_STARTER_JINJA_TEMPLATES_DIRECTORY}/Dock
 
 
 RUN pip3 install -r requirements.txt
+
 
 CMD ["python", "server.py"]
