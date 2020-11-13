@@ -33,14 +33,3 @@ def assemble_starter():
     )
     response.headers['Access-Control-Expose-Headers'] = 'content-type, content-disposition'
     return response
-
-
-@bp.route('/test')
-def test_assemble():
-    language = 'python'
-    framework = 'flask'
-    modules = [
-        {'name': 'Flask', 'version': '1.1.2'},
-        {'name': 'requests', 'version': '2.24.0'}
-    ]
-    return send_file(current_app.assembler.assemble_and_zip_starter(language, framework, modules), as_attachment=True)

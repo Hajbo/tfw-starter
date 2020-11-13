@@ -9,12 +9,11 @@ from tfw.starters.utils import get_language_folder_by_name, get_framework_folder
 from .git_utils import init_starter_repo
 
 
-
 class Assembler(metaclass=SingletonMeta):
 
     def __init__(self):
         self._language_config = None
-        self._zip_base_name = '/tmp/tfw-starter'
+        self._file_base_name = '/tmp/tfw-starter'
 
     def __init_language_config(self, language, framework):
         language_folder = get_language_folder_by_name(language)
@@ -22,8 +21,8 @@ class Assembler(metaclass=SingletonMeta):
         self._language_config = import_module(f'tfw.starters.{language_folder}.language_config').LanguageConfig(language_folder, framework_folder)
     
     @property
-    def _zip_name(self):
-        return f'{self._zip_base_name}-{datetime.datetime.now().strftime("%Y%m%d-%H%M%S")}'
+    def _file_name(self):
+        return f'{self._file_base_name}-{datetime.datetime.now().strftime("%Y%m%d-%H%M%S")}'
 
     @cached_property
     def _tfw_starter_source_path(self) -> str:
@@ -71,7 +70,7 @@ class Assembler(metaclass=SingletonMeta):
 
     def __generate_zip(self) -> ZipFile:
         starter_zip = shutil.make_archive(
-            self._zip_name,
+            self._file_name,
             'zip',
             self._tfw_starter_workdir_path
         )
