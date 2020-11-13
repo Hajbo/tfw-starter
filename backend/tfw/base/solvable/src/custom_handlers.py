@@ -9,12 +9,14 @@ LOG = logging.getLogger(__name__)
 
 
 class CenatorHandler:
-    keys = ['history.bash']
+    keys = ["history.bash"]
 
     def handle_event(self, message, connector):  # pylint: disable=no-self-use
-        command = message['command']
+        command = message["command"]
         LOG.debug('User executed command: "%s"', command)
-        MessageSender(connector).send(f'You\'ve executed "{command}"', originator='JOHN CENA')
+        MessageSender(connector).send(
+            f'You\'ve executed "{command}"', originator="JOHN CENA"
+        )
 
 
 class TestCommandsHandler(TerminalCommandsHandler):
@@ -22,15 +24,14 @@ class TestCommandsHandler(TerminalCommandsHandler):
     def command_sendmessage(self, *args):
         if not args:
             message_template = """'{"key": ""}'"""
-            TFWUplinkConnector().send_message({
-                'key': 'terminal.write',
-                'command': f'sendmessage {message_template}'
-            })
+            TFWUplinkConnector().send_message(
+                {"key": "terminal.write", "command": f"sendmessage {message_template}"}
+            )
         else:
             try:
                 TFWUplinkConnector().send_message(loads(args[0]))
             except JSONDecodeError:
-                LOG.error('IGNORING MESSAGE: Invalid message received: %s', args[0])
+                LOG.error("IGNORING MESSAGE: Invalid message received: %s", args[0])
 
 
 def messageFSMStepsHandler(message, connector):
@@ -41,5 +42,5 @@ def messageFSMStepsHandler(message, connector):
     MessageSender(connector).send(
         f'FSM has stepped from state "{message["last_event"]["from_state"]}" '
         f'to state "{message["current_state"]}" in response to trigger "{message["last_event"]["trigger"]}"',
-        originator='FSM info'
+        originator="FSM info",
     )

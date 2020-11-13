@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
 
+
 class FrameworkConfigBase(ABC):
-    
     @property
     def docker_commands(self):
         return []
@@ -9,4 +9,4 @@ class FrameworkConfigBase(ABC):
     @property
     @abstractmethod
     def supervisor_command(self):
-        return ''
+        return ""

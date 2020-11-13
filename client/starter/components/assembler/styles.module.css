@@ -1,9 +1,17 @@
+.main {
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
+    width: 80%;
+}
+
 .assembler {
     display: flex;
     flex-flow: row;
     justify-content: space-evenly;
     max-height: 60%;
-    width: 80%;
+    width: 100%;
     padding-top: 5%;
     padding-bottom: 5%;
 }
