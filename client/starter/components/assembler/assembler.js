@@ -1,17 +1,8 @@
 import React from "react"
 import {FrameworkColumn, LanguageColumn, AllModulesColumn, SelectedModulesColumn} from './columns'
+import DownloadButton from "./button"
 import styles from './styles.module.css'
 
-
-const test = [
-    'A', 'B', 'C', 'D'
-]
-
-const selectedModules = [
-    {'name': 'A'}
-]
-
-const allModules = [{'name': 'A'}, {'name': 'B'}, {'name': 'C'}, {'name': 'D'}]
 
 class Assembler extends React.Component  {
 
@@ -80,7 +71,6 @@ class Assembler extends React.Component  {
 
 
     handleAddModule(toAdd) {
-        console.log(toAdd);
         this.setState({
             languages: this.state.languages,
             frameworks: this.state.frameworks,
@@ -104,23 +94,32 @@ class Assembler extends React.Component  {
 
     render() {
         return(
-            <div className={styles.assembler}>
-                <LanguageColumn 
-                    children={this.state.languages.all} name='languages'
-                    onLanguageSelect={this.handleLanguageSelect}
+            <div className={styles.main}>
+                <div className={styles.assembler}>
+                    <LanguageColumn 
+                        children={this.state.languages.all} name='languages'
+                        onLanguageSelect={this.handleLanguageSelect}
+                    />
+                    <FrameworkColumn 
+                        children={this.state.frameworks.all} name='frameworks'
+                        onFrameworkSelect={this.handleFrameworkSelect}
+                    />
+                    <SelectedModulesColumn 
+                        children={this.state.modules.selected}
+                        onRemoveModule={this.handleRemoveModule}
+                    />
+                    <AllModulesColumn 
+                        children={this.state.modules.all}
+                        onAddModule={this.handleAddModule}
+                    />
+                </div>
+                
+                <DownloadButton
+                    language={this.state.languages.selected}
+                    framework={this.state.frameworks.selected}
+                    modules={this.state.modules.selected}
                 />
-                <FrameworkColumn 
-                    children={this.state.frameworks.all} name='frameworks'
-                    onFrameworkSelect={this.handleFrameworkSelect}
-                />
-                <SelectedModulesColumn 
-                    children={this.state.modules.selected}
-                    onRemoveModule={this.handleRemoveModule}
-                />
-                <AllModulesColumn 
-                    children={this.state.modules.all}
-                    onAddModule={this.handleAddModule}
-                />
+                
             </div>
         )
     }

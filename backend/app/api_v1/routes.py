@@ -1,4 +1,4 @@
-from flask import jsonify, request, current_app, send_file
+from flask import jsonify, request, current_app, send_file, make_response
 from app.api_v1 import bp
 from tfw.starters.utils import get_supported_language_names, get_framework_names_for_language, get_supported_modules
 
@@ -28,7 +28,11 @@ def assemble_starter():
     language = request.json.get('language')
     framework = request.json.get('framework')
     modules = request.json.get('modules')
-    return send_file(current_app.assembler.assemble_and_zip_starter(language, framework, modules), as_attachment=True)
+    response = make_response(
+        send_file(current_app.assembler.assemble_and_zip_starter(language, framework, modules), as_attachment=True)
+    )
+    response.headers['Access-Control-Expose-Headers'] = 'content-type, content-disposition'
+    return response
 
 
 @bp.route('/test')

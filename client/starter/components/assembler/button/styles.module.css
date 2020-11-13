@@ -1,0 +1,22 @@
+.download-button {
+    height: 40px;
+    color: #ffffff!important;
+    border-width: 2px!important;
+    border-color: rgba(0,0,0,0);
+    border-radius: 14px;
+    letter-spacing: 1px;
+    font-size: 22px;
+    font-family: 'Barlow',Helvetica,Arial,Lucida,sans-serif!important;
+    font-weight: 600!important;
+    background-color: #5a64ed;
+    transition: letter-spacing 1s;
+}
+
+.download-button:hover {
+    letter-spacing: 3px;
+    cursor: pointer;
+}
+
+.download-button:focus {
+    outline: none;
+}
