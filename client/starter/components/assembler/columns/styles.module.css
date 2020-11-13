@@ -100,12 +100,16 @@
     background-color:rgba(0, 0, 0, 0) !important;
   }
   
-.btn:hover {
+.btn > i:hover {
     color: RoyalBlue !important;
 }
 
 .btn > i {
     background-color:rgba(0, 0, 0, 0) !important;
+}
+
+.btn:focus {
+    outline: 0 !important;
 }
 
 .row-header {

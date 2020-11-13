@@ -48,10 +48,13 @@ class Assembler extends React.Component  {
                         selected: selectedLanguage
                     },
                     frameworks: {
-                        all: res.supported_frameworks, // Some magic fetch
+                        all: res.supported_frameworks,
                         selected: null
                     },
-                    modules: this.state.modules
+                    modules: {
+                        all: null,
+                        selected: null
+                    }
                 })
             })
         }
@@ -68,8 +71,8 @@ class Assembler extends React.Component  {
                         selected: selectedFramework
                     },
                     modules: {
-                        all: res.modules.optional.filter(module => !res.modules.mandatory.map(m => m.name).includes(module.name) ), // Some magic fetch
-                        selected: res.modules.mandatory // Some magic fetch
+                        all: res.modules.optional.filter(module => !res.modules.mandatory.map(m => m.name).includes(module.name) ),
+                        selected: res.modules.mandatory
                     }
                 })
             })
