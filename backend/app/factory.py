@@ -14,6 +14,7 @@ def create_app(config_class=AppConfig):
     app.assembler = Assembler()
 
     from app.api_v1 import bp as api_v1_bp
-    app.register_blueprint(api_v1_bp, url_prefix='/api/v1')
-    
+
+    app.register_blueprint(api_v1_bp, url_prefix="/api/v1")
+
     return app

@@ -15,16 +15,14 @@ def main():
 
     eh_factory = EventHandlerFactory()
 
-    json_pipe_eh = eh_factory.build(PipeIOHandler(
-        '/tmp/tfw_send',
-        '/tmp/tfw_recv',
-        permissions=0o666
-    ))
+    json_pipe_eh = eh_factory.build(
+        PipeIOHandler("/tmp/tfw_send", "/tmp/tfw_recv", permissions=0o666)
+    )
     proxy_pipe_eh = eh_factory.build(ProxyPipeConnectorHandler(TFWENV.PIPES_DIR))
 
     setup_signal_handlers()
     IOLoop.current().start()
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
