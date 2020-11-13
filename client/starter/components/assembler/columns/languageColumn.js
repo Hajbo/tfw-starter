@@ -19,7 +19,7 @@ class LanguageColumn extends React.Component {
             <div className={classNames(styles['language-column'], this.props.name)}>
                 {this.props.children ? this.props.children.map(language => <div className={styles.row} key={classNames(language, 'item')}> 
                     <input type="radio" value={language} id={language} name={this.props.name} onClick={this.handleSelect}/> 
-                    <label for={language}>{language}</label>
+                    <label htmlFor={language}>{language}</label>
                     </div>) : 'Something went wrong 😨'}  
             </div>
         )

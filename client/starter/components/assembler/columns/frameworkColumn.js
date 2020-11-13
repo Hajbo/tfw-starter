@@ -19,7 +19,7 @@ class FrameworkColumn extends React.Component {
             <div className={classNames(styles['framework-column'], this.props.name)}>
                 {this.props.children ? this.props.children.map(framework => <div className={styles.row} key={classNames(framework, 'item')}> 
                     <input type="radio" value={framework} id={framework} name={this.props.name} onClick={this.handleSelect}/> 
-                    <label for={framework}>{framework}</label>
+                    <label htmlFor={framework}>{framework}</label>
                     </div>) : 'Please select a language'}  
             </div>
         )
