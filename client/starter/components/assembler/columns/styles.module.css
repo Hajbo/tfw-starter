@@ -1,4 +1,23 @@
-.language-column{
+.column-wrapper{ 
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+}
+
+.column-header {
+    width: 100%;
+    height: 7.5vh;
+    font-weight: 600;
+    font-size: large;
+    border-bottom: 1px solid rgb(0, 146, 247);
+    border-top: 1px solid rgb(0, 146, 247);
+    text-align: center;
+    padding: 7px;
+}
+
+.language-column {
     display: flex;
     flex-flow: column;
     align-items: center;
@@ -7,13 +26,16 @@
     padding: 0;
 }
 
-.language-column :nth-child(even) {
+.column-content {
     width: 100%;
+    text-align: center;
+}
+
+.language-column > .column-content :nth-child(even) {
     background-color: #f2f5ff;
   }
 
-.language-column :nth-child(odd) {
-    width: 100%;
+.language-column > .column-content :nth-child(odd) {
     background-color: #fcfcfc;
 }
 
@@ -27,13 +49,11 @@
     border-left: 1px solid rgb(0, 146, 247);
 }
 
-.framework-column :nth-child(odd) {
-    width: 100%;
+.framework-column > .column-content :nth-child(odd) {
     background-color: #f2f5ff;
   }
 
-.framework-column :nth-child(even) {
-    width: 100%;
+.framework-column > .column-content :nth-child(even) {
     background-color: #fcfcfc;
 }
 
@@ -45,13 +65,11 @@
     border-left: 1px solid rgb(0, 146, 247);
 }
 
-.module-column-selected :nth-child(even) {
-    width: 100%;
+.module-column-selected > .column-content :nth-child(even) {
     background-color: #f2f5ff;
   }
 
-.module-column-selected :nth-child(odd) {
-    width: 100%;
+.module-column-selected > .column-content :nth-child(odd) {
     background-color: #fcfcfc;
 }
 
@@ -64,22 +82,26 @@
     border-left: 1px solid rgb(0, 146, 247);
 }
 
-.module-column-all :nth-child(odd) {
-    width: 100%;
+.module-column-all > .column-content :nth-child(odd) {
     background-color: #f2f5ff;
   }
 
-.module-column-all :nth-child(even) {
-    width: 100%;
+.module-column-all > .column-content :nth-child(even) {
     background-color: #fcfcfc;
 }
 
 .row {
     display: flex;
     flex-flow: row;
-    justify-content: space-between;
+    justify-content: flex-start;
+    align-items: center;
+    padding-left: 5px;
     height: 30px;
     width: 100%;
+}
+
+.double-row {
+    height: 60px;
 }
 
 .row > input[type=radio] {
@@ -89,6 +111,7 @@
 
 .row > label {
     background-color:rgba(0, 0, 0, 0) !important;
+    padding-left: 8px;
 }
 
 .btn {
@@ -116,4 +139,9 @@
     width: calc(100% - 30px);
     text-align: center;
     background-color:rgba(0, 0, 0, 0) !important;
+}
+
+.message {
+    background-color: #ffffff !important;
+    padding: 20px;
 }
