@@ -5,7 +5,7 @@ import {
   AllModulesColumn,
   SelectedModulesColumn,
 } from "./columns";
-import {DownloadButton} from "./button";
+import { DownloadButton } from "./button";
 import styles from "./styles.module.css";
 
 class Assembler extends React.Component {

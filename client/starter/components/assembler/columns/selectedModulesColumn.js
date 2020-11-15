@@ -1,14 +1,14 @@
 import React from "react";
 import classNames from "classnames";
 import Modal from "../modal";
-import {ModalToggleButton} from "../button";
+import { ModalToggleButton } from "../button";
 import styles from "./styles.module.css";
 
 class SelectedModulesColumn extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      isModalOpen: false
+      isModalOpen: false,
     };
     this.removeModule = this.removeModule.bind(this);
     this.toggleModal = this.toggleModal.bind(this);
@@ -32,27 +32,47 @@ class SelectedModulesColumn extends React.Component {
 
   render() {
     return (
-      <div className={styles["column-wrapper"] + ' ' + styles["module-column-selected"]}>
+      <div
+        className={
+          styles["column-wrapper"] + " " + styles["module-column-selected"]
+        }
+      >
         <div className={styles["column-header"]}>
           Selected dependencies
-          <br/>
-          <ModalToggleButton onClick={this.toggleModal} disabled={this.props.children ? false : true}/>
-          <Modal isOpen={this.state.isModalOpen} onClose={this.toggleModal} onSave={this.addExtraDependency}/>
+          <br />
+          <ModalToggleButton
+            onClick={this.toggleModal}
+            disabled={this.props.children ? false : true}
+          />
+          <Modal
+            isOpen={this.state.isModalOpen}
+            onClose={this.toggleModal}
+            onSave={this.addExtraDependency}
+          />
         </div>
         <div className={styles["column-content"]}>
-          {this.props.children
-            ? this.props.children.map((module) => (
-                <div className={styles.row + ' ' + styles["double-row"]} key={classNames(module.name, "item")}>
-                  <div className={styles["row-header"]}>{module.name}<br/>{module.version}</div>
-                  <button className={styles.btn}>
-                    <i
-                      className="fa fa-minus-circle"
-                      onClick={(e) => this.removeModule(module)}
-                    ></i>
-                  </button>
+          {this.props.children ? (
+            this.props.children.map((module) => (
+              <div
+                className={styles.row + " " + styles["double-row"]}
+                key={classNames(module.name, "item")}
+              >
+                <div className={styles["row-header"]}>
+                  {module.name}
+                  <br />
+                  {module.version}
                 </div>
-              ))
-            : <div className={styles.message}> Please select a framework </div>}
+                <button className={styles.btn}>
+                  <i
+                    className="fa fa-minus-circle"
+                    onClick={(e) => this.removeModule(module)}
+                  ></i>
+                </button>
+              </div>
+            ))
+          ) : (
+            <div className={styles.message}> Please select a framework </div>
+          )}
         </div>
       </div>
     );
