@@ -12,11 +12,31 @@
     transition: letter-spacing 1s;
 }
 
-.download-button:hover {
+.dependency-add-button {
+    height: 25px;
+    color: #ffffff!important;
+    border-width: 2px!important;
+    border-color: rgba(0,0,0,0);
+    border-radius: 5px;
+    letter-spacing: 1px;
+    font-size: 14px;
+    font-family: 'Barlow',Helvetica,Arial,Lucida,sans-serif!important;
+    font-weight: 500!important;
+    background-color: #5a64ed;
+    transition: letter-spacing 1s;
+}
+
+.download-button:hover, .dependency-add-button:hover {
     letter-spacing: 3px;
     cursor: pointer;
 }
 
-.download-button:focus {
+.download-button:focus, .dependency-add-button:focus {
     outline: none;
+}
+
+.max-width-30 {
+    max-width: 30%;
+    margin-left: 35%;
+    margin-top: 5%;
 }
