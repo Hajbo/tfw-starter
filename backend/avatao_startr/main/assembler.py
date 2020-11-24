@@ -4,9 +4,9 @@ import os
 import datetime
 from functools import cached_property
 from importlib import import_module
-from utils import SingletonMeta, render_template
-from tfw.starters.utils import get_language_folder_by_name, get_framework_folder_by_name
-from .git_utils import init_starter_repo
+from avatao_startr.utils import SingletonMeta, render_template
+from avatao_startr.tfw.starter_kits.utils import get_language_folder_by_name, get_framework_folder_by_name
+from avatao_startr.main.git_utils import init_starter_repo
 
 
 class Assembler(metaclass=SingletonMeta):

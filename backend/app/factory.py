@@ -2,7 +2,7 @@ from flask import Flask
 from flask_cors import CORS
 
 from app.config import AppConfig
-from main.starter_assembler import Assembler
+from avatao_startr.main.assembler import Assembler
 
 
 def create_app(config_class=AppConfig):
@@ -18,3 +18,4 @@ def create_app(config_class=AppConfig):
     app.register_blueprint(api_v1_bp, url_prefix="/api/v1")
 
     return app
+    

@@ -1,6 +1,6 @@
 from flask import jsonify, request, current_app, send_file, make_response
 from app.api_v1 import bp
-from tfw.starters.utils import (
+from avatao_startr.tfw.starter_kits.utils import (
     get_supported_language_names,
     get_framework_names_for_language,
     get_supported_modules,

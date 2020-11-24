@@ -1,18 +1,18 @@
-FROM python:3
+FROM python:3.9.0-buster
 
 RUN apt-get update && \
     apt-get upgrade -y && \
     apt-get install -y git
 
-COPY . /usr/src/app
+COPY . /srv/app
 
-WORKDIR /usr/src/app
+WORKDIR /srv/app
 
 ENV TFW_STARTER_WORKING_DIRECTORY=/tmp/starter          \
-    TFW_STARTER_SOURCE_DIRECTORY=/usr/src/app/tfw
+    TFW_STARTER_SOURCE_DIRECTORY=/srv/app/avatao_startr/tfw
     
 ENV TFW_STARTER_TEMPLATE_BASE="${TFW_STARTER_SOURCE_DIRECTORY}/base"                    \
-    TFW_STARTER_LANGUAGE_TEMPLATES_DIRECTORY="${TFW_STARTER_SOURCE_DIRECTORY}/starters" \
+    TFW_STARTER_LANGUAGE_TEMPLATES_DIRECTORY="${TFW_STARTER_SOURCE_DIRECTORY}/starter_kits" \
     TFW_STARTER_JINJA_TEMPLATES_DIRECTORY="${TFW_STARTER_SOURCE_DIRECTORY}/templates"
 
 ENV TFW_STARTER_SUPPORTED_LANGUAGES="${TFW_STARTER_LANGUAGE_TEMPLATES_DIRECTORY}/languages.json"                        \
@@ -22,8 +22,8 @@ ENV TFW_STARTER_SUPPORTED_LANGUAGES="${TFW_STARTER_LANGUAGE_TEMPLATES_DIRECTORY}
     TFW_STARTER_SUPERVISOR_CONFIG_DESTINATION="${TFW_STARTER_WORKING_DIRECTORY}/solvable/supervisor/webservice.conf"    \
     TFW_STARTER_WEBSERVICE_DESTINATION="${TFW_STARTER_WORKING_DIRECTORY}/solvable/src/webservice"
 
-
 RUN pip3 install -r requirements.txt
 
+EXPOSE 5000
 
-CMD ["python", "server.py"]
+CMD ["python", "app.py"]
