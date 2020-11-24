@@ -1,11 +1,14 @@
 import os
 import json
 from functools import lru_cache
+from zipfile import Path
+from avatao_startr.main.path_helper import PathHelper
 
 
 @lru_cache(maxsize=1)
 def load_languages():
-    with open(os.environ.get("TFW_STARTER_SUPPORTED_LANGUAGES"), "r") as f:
+
+    with open(PathHelper().supported_languages, "r") as f:
         return json.loads(f.read())
 
 
@@ -66,7 +69,7 @@ def get_supported_modules(language_name, framework_name):
 
     with open(
         os.path.join(
-            os.environ.get("TFW_STARTER_LANGUAGE_TEMPLATES_DIRECTORY"),
+            PathHelper().starter_kits,
             f"{language_folder}/supported_modules.json",
         ),
         "r",
@@ -75,7 +78,7 @@ def get_supported_modules(language_name, framework_name):
 
     with open(
         os.path.join(
-            os.environ.get("TFW_STARTER_LANGUAGE_TEMPLATES_DIRECTORY"),
+            PathHelper().starter_kits,
             f"{language_folder}/{framework_folder}/required_modules.json",
         ),
         "r",

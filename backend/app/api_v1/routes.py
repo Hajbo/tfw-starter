@@ -1,5 +1,6 @@
-from flask import jsonify, request, current_app, send_file, make_response
+from flask import jsonify, request, send_file, make_response
 from app.api_v1 import bp
+from avatao_startr.main.assembler import Assembler
 from avatao_startr.tfw.starter_kits.utils import (
     get_supported_language_names,
     get_framework_names_for_language,
@@ -31,15 +32,16 @@ def supported_modules(language, framework):
 def assemble_starter():
     language = request.json.get("language")
     framework = request.json.get("framework")
-    modules = request.json.get("modules")
-    response = make_response(
-        send_file(
-            current_app.assembler.assemble_and_zip_starter(
-                language, framework, modules
-            ),
-            as_attachment=True,
+    dependency_list = request.json.get("modules")
+    with Assembler() as assembler:
+        response = make_response(
+            send_file(
+                assembler.assemble_and_zip_starter(
+                    language, framework, dependency_list
+                ),
+                as_attachment=True,
+            )
         )
-    )
     response.headers[
         "Access-Control-Expose-Headers"
     ] = "content-type, content-disposition"

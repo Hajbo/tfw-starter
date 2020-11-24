@@ -1,5 +1,5 @@
 import os
-from main.starter_config.language_config_base import LanguageConfigBase
+from avatao_startr.main.language_config_base import LanguageConfigBase
 
 
 class LanguageConfig(LanguageConfigBase):
@@ -8,9 +8,7 @@ class LanguageConfig(LanguageConfigBase):
             'RUN python3 -m pip install -r "${TFW_WEBSERVICE_DIR}/requirements.txt"'
         ]
         with open(
-            os.path.join(
-                os.environ.get("TFW_STARTER_WEBSERVICE_DESTINATION"), "requirements.txt"
-            ),
+            os.path.join(self._webservice_folder_path, "requirements.txt"),
             "w+",
         ) as requirements:
             for module in module_list:

@@ -1,4 +1,4 @@
-from main.starter_config import FrameworkConfigBase
+from avatao_startr.main.framework_config_base import FrameworkConfigBase
 
 
 class FrameworkConfig(FrameworkConfigBase):

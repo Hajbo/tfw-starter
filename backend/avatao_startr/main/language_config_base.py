@@ -1,23 +1,22 @@
-import os
 from abc import ABC, abstractmethod
-from functools import cached_property
 from importlib import import_module
 
 
 class LanguageConfigBase(ABC):
-    def __init__(self, language, framework):
+    def __init__(self, language, framework, webservice_folder_path):
         self._language = language
         self._framework = framework
+        self._webservice_folder_path = webservice_folder_path
         self._framework_config = self.__init_framework_config(language, framework)
 
     def __init_framework_config(self, language_folder, framework_folder):
         return import_module(
-            f"tfw.starters.{language_folder}.{framework_folder}.framework_config"
+            f"avatao_startr.tfw.starter_kits.{language_folder}.{framework_folder}.framework_config"
         ).FrameworkConfig()
 
     @classmethod
     def __run_script(self, script_name):
-        import_module(f"scripts.{script_name}").run()
+        import_module(f"avatao_startr.scripts.{script_name}").run()
 
     @property
     def docker_commands(self):
@@ -37,7 +36,7 @@ class LanguageConfigBase(ABC):
 
     @property
     def dockerfile_template_location(self):
-        return os.environ.get("TFW_STARTER_DOCKERFILE_SOURCE")
+        return None
 
     @abstractmethod
     def install_modules(self, module_list):
