@@ -1,3 +1,5 @@
 import DownloadButton from "./downloadButton";
+import ModalToggleButton from "./modalToggleButton";
+import DependencyAddButton from "./dependencyAddButton";
 
-export default DownloadButton;
+export { DownloadButton, ModalToggleButton, DependencyAddButton };

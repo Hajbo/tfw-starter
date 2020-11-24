@@ -5,7 +5,7 @@ import {
   AllModulesColumn,
   SelectedModulesColumn,
 } from "./columns";
-import DownloadButton from "./button";
+import { DownloadButton } from "./button";
 import styles from "./styles.module.css";
 
 class Assembler extends React.Component {
@@ -30,6 +30,7 @@ class Assembler extends React.Component {
     this.handleFrameworkSelect = this.handleFrameworkSelect.bind(this);
     this.handleAddModule = this.handleAddModule.bind(this);
     this.handleRemoveModule = this.handleRemoveModule.bind(this);
+    this.addExtraDependency = this.addExtraDependency.bind(this);
   }
 
   handleLanguageSelect(selectedLanguage) {
@@ -102,6 +103,17 @@ class Assembler extends React.Component {
     });
   }
 
+  addExtraDependency(dependency) {
+    this.setState({
+      languages: this.state.languages,
+      frameworks: this.state.frameworks,
+      modules: {
+        all: this.state.modules.all,
+        selected: this.state.modules.selected.concat([dependency]),
+      },
+    });
+  }
+
   render() {
     return (
       <div className={styles.main}>
@@ -119,6 +131,7 @@ class Assembler extends React.Component {
           <SelectedModulesColumn
             children={this.state.modules.selected}
             onRemoveModule={this.handleRemoveModule}
+            addExtraDependency={this.addExtraDependency}
           />
           <AllModulesColumn
             children={this.state.modules.all}
