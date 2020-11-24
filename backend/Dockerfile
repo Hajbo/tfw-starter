@@ -4,15 +4,25 @@ RUN apt-get update && \
     apt-get upgrade -y && \
     apt-get install -y git
 
-COPY . /srv/app
+RUN useradd -ms /bin/bash startr
 
-WORKDIR /srv/app
+ENV VIRTUAL_ENV=/srv/startr
+RUN python3 -m venv $VIRTUAL_ENV
+ENV PATH="$VIRTUAL_ENV/bin:$PATH"
+
+WORKDIR $VIRTUAL_ENV
+
+COPY . /srv/startr
+RUN python3 -m pip install -r requirements.txt
+RUN chmod a+x boot.sh
+RUN chown -R startr:startr ./
 
 ENV TFW_STARTER_WORKING_DIRECTORY=/tmp/workdir          \
-    TFW_STARTER_SOURCE_DIRECTORY=/srv/app/avatao_startr/tfw
-    
-RUN pip3 install -r requirements.txt
+    TFW_STARTER_SOURCE_DIRECTORY="$VIRTUAL_ENV/avatao_startr/tfw" \
+    FLASK_APP=startr.py
+
+USER startr
 
 EXPOSE 5000
 
-CMD ["python", "app.py"]
+CMD ["./boot.sh"]
