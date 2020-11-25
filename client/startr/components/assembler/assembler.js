@@ -56,7 +56,7 @@ class Assembler extends React.Component {
 
   handleFrameworkSelect(selectedFramework) {
     fetch(
-      `http://localhost:5000/api/v1/languages/${this.state.languages.selected}/${selectedFramework}`
+      `http://localhost:5000/api/v1/languages/${this.state.languages.selected}/frameworks/${selectedFramework}`
     )
       .then((res) => res.json())
       .then((res) => {

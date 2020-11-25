@@ -6,7 +6,6 @@ from avatao_startr.main.path_helper import PathHelper
 
 @lru_cache(maxsize=1)
 def load_languages():
-
     with open(PathHelper().supported_languages, "r") as f:
         return json.loads(f.read())
 

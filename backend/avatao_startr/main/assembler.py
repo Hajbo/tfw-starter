@@ -55,11 +55,9 @@ class Assembler:
         )
 
     def __template_dockerfile(self):
-
         render_template(
             template_file=self._language_config.dockerfile_template_location
-                    if self._language_config.dockerfile_template_location
-                    else self._path_helper.dockerfile_template_source,
+                    or self._path_helper.dockerfile_template_source,
             destination_file=self._path_helper.get_dockerfile_destination(
                 self._uuid, self._workdir_folder_name
             ),

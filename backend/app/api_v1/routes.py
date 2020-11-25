@@ -23,7 +23,7 @@ def supported_frameworks(language):
     )
 
 
-@bp.route("/languages/<language>/<framework>", methods=["GET"])
+@bp.route("/languages/<language>/frameworks/<framework>", methods=["GET"])
 def supported_modules(language, framework):
     return jsonify(get_supported_modules(language, framework))
 
