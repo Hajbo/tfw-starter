@@ -19,7 +19,8 @@ RUN chown -R startr:startr ./
 
 ENV TFW_STARTER_WORKING_DIRECTORY=/tmp/workdir          \
     TFW_STARTER_SOURCE_DIRECTORY="$VIRTUAL_ENV/avatao_startr/tfw" \
-    FLASK_APP=startr.py
+    FLASK_APP=startr.py \
+    FLASK_ENV=production
 
 USER startr
 

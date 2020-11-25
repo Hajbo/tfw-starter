@@ -4,7 +4,6 @@ import styles from "./styles.module.css";
 
 class AllModulesColumn extends React.Component {
   constructor(props) {
-    console.log(props);
     super(props);
     this.state = {
       searchKeyword: null,

@@ -15,7 +15,7 @@ const Index = ({ languages }) => (
 );
 
 Index.getInitialProps = async (ctx) => {
-  const res = await fetch("http://localhost:5000/api/v1/languages");
+  const res = await fetch("http://backend:5000/api/v1/languages");
   const json = await res.json();
   return { languages: json.supported_languages };
 };

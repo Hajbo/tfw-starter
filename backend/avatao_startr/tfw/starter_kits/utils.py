@@ -1,7 +1,6 @@
 import os
 import json
 from functools import lru_cache
-from zipfile import Path
 from avatao_startr.main.path_helper import PathHelper
 
 

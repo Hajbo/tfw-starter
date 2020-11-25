@@ -10,16 +10,16 @@ services:
     ports:
       - "5000:5000"
     volumes:
-      - ./backend:/srv/app
+      - ./backend:/srv/startr
 
   client:
     container_name: startr-client
     restart: always
     build:
       context: ./client
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.dev
     volumes:
-      - ./client:/usr/src/client
+      - ./client:/srv/client
     ports:
       - '3000:3000'
     depends_on:

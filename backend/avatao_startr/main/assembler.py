@@ -55,34 +55,25 @@ class Assembler:
         )
 
     def __template_dockerfile(self):
-        with open(
-            self._path_helper.get_dockerfile_destination(
-                self._uuid, self._workdir_folder_name
-            ),
-            "w+",
-        ) as dockerfile:
-            dockerfile.write(
-                render_template(
-                    path_to_template_file=self._language_config.dockerfile_template_location
+
+        render_template(
+            template_file=self._language_config.dockerfile_template_location
                     if self._language_config.dockerfile_template_location
                     else self._path_helper.dockerfile_template_source,
-                    data=self._language_config.docker_commands,
-                )
-            )
-
-    def __template_supervisor_config(self):
-        with open(
-            self._path_helper.get_supervisor_config_destination(
+            destination_file=self._path_helper.get_dockerfile_destination(
                 self._uuid, self._workdir_folder_name
             ),
-            "w+",
-        ) as dockerfile:
-            dockerfile.write(
-                render_template(
-                    path_to_template_file=self._path_helper.supervisor_config_source,
-                    data=self._language_config.supervisor_command,
-                )
-            )
+            data=self._language_config.docker_commands,
+        )
+
+    def __template_supervisor_config(self):
+        render_template(
+            template_file=self._path_helper.supervisor_config_source,
+            destination_file=self._path_helper.get_supervisor_config_destination(
+                self._uuid, self._workdir_folder_name
+            ),
+            data=self._language_config.supervisor_command,
+        )
 
     def __init_language_config(
         self, language_package, framework_package, webservice_folder_path

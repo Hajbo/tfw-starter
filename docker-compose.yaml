@@ -20,4 +20,3 @@ services:
       - "backend"
     environment:
       - NODE_ENV=production
-

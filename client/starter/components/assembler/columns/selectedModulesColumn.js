@@ -25,8 +25,6 @@ class SelectedModulesColumn extends React.Component {
   }
 
   addExtraDependency(dependency) {
-    console.log("SELECTMODULE");
-    console.log(dependency);
     this.props.addExtraDependency(dependency);
   }
 

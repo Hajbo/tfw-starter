@@ -4,14 +4,14 @@ RUN apt-get update && \
     apt-get upgrade -y && \
     apt-get install -y git
 
-COPY . /srv/startr
-
 WORKDIR /srv/startr
+
+COPY requirements.txt .
 
 RUN pip3 install -r requirements.txt
 
-ENV TFW_STARTER_WORKING_DIRECTORY=/tmp/workdir          \
-    TFW_STARTER_SOURCE_DIRECTORY=/srv/app/avatao_startr/tfw
+ENV TFW_STARTER_WORKING_DIRECTORY=/tmp/workdir \
+    TFW_STARTER_SOURCE_DIRECTORY=/srv/startr/avatao_startr/tfw
 
 EXPOSE 5000
 
