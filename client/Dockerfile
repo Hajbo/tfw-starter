@@ -1,21 +1,21 @@
 FROM node:13.12.0-alpine
 
 # Set working directory
-WORKDIR /usr/src/app
+WORKDIR /srv/startr
 
 # Install PM2 globally
 RUN npm install --global pm2
 
 # Copy package.json and package-lock.json before other files
 # Utilise Docker cache to save re-installing dependencies if unchanged
-COPY /starter/package.json package.json
-COPY /starter/package-lock.json package-lock.json
+COPY /startr/package.json package.json
+COPY /startr/package-lock.json package-lock.json
 
 # Install dependencies
 RUN npm install --production
 
 # Copy all files
-COPY /starter ./
+COPY /startr ./
 
 # Build app
 RUN npm run build

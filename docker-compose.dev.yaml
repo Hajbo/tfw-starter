@@ -2,7 +2,7 @@ version: '3.7'
 
 services:
   backend:
-    container_name: startr-backend
+    container_name: startr-backend-dev
     restart: always
     build:
       context: ./backend
@@ -13,13 +13,13 @@ services:
       - ./backend:/srv/startr
 
   client:
-    container_name: startr-client
+    container_name: startr-client-dev
     restart: always
     build:
       context: ./client
       dockerfile: Dockerfile.dev
     volumes:
-      - ./client:/srv/client
+      - ./client/startr:/srv/startr
     ports:
       - '3000:3000'
     depends_on:

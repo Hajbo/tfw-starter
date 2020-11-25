@@ -1,5 +1,5 @@
 FROM node:13.12.0-alpine
 
-WORKDIR /usr/src/client/starter
+WORKDIR /srv/startr
 
 CMD ["npm", "run", "dev"]
