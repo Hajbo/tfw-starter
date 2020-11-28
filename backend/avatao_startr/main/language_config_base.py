@@ -11,7 +11,9 @@ class LanguageConfigBase(ABC):
         self._webservice_folder_path = webservice_folder_path
         self._framework_config = self.__init_framework_config(language, framework)
 
-    def __init_framework_config(self, language_folder, framework_folder) -> FrameworkConfigBase:
+    def __init_framework_config(
+        self, language_folder, framework_folder
+    ) -> FrameworkConfigBase:
         package = (
             "avatao_startr.tfw.starter_kits."
             f"{language_folder}.{framework_folder}.framework_config"

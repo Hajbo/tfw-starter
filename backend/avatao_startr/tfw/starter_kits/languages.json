@@ -15,8 +15,12 @@
     },
     {
         "name": "Node.js",
-        "folder": "nodej",
+        "folder": "nodejs",
         "frameworks": [
+            {
+                "name": "Express.js",
+                "folder": "express"
+            }
         ]
     },
     {

@@ -8,7 +8,7 @@ WORKDIR /srv/startr
 
 COPY requirements.txt .
 
-RUN pip3 install -r requirements.txt
+RUN python3 -m pip install -r requirements.txt
 
 ENV TFW_STARTER_WORKING_DIRECTORY=/tmp/workdir \
     TFW_STARTER_SOURCE_DIRECTORY=/srv/startr/avatao_startr/tfw
