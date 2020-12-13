@@ -1,16 +1,9 @@
-FROM avatao/baseimage-tutorial-framework:chausie-20200701
+FROM avatao/tutorial:ragdoll-20201201
 
-# Define variables to use later
-ENV TFW_EHMAIN_DIR="${TFW_DIR}/builtin_event_handlers" \
-    TFW_WEBSERVICE_DIR="/srv/webservice"               \
-    TFW_IDE_WD="/home/${AVATAO_USER}/workdir"          \
-    TFW_TERMINADO_WD="/home/${AVATAO_USER}/workdir"
+ENV TFW_WEBSERVICE_DIR=/home/user/webservice
 
-# Copy TFW related stuff to a dedicated directory
-COPY solvable/src ${TFW_EHMAIN_DIR}/
-
-# Copy webservice to a dedicated directory
-COPY solvable/src/webservice/ ${TFW_WEBSERVICE_DIR}/
+COPY solvable/supervisor /etc/supervisor
+COPY solvable/webservice $TFW_WEBSERVICE_DIR
 
 # Custom commands
 {% if data -%}
@@ -19,17 +12,4 @@ COPY solvable/src/webservice/ ${TFW_WEBSERVICE_DIR}/
     {%- endfor %}
 {%- endif %}
 
-# Create IDE directory, symlink server source and give proper permissions to AVATAO_USER
-RUN mkdir -p ${TFW_IDE_WD}                                               &&\
-    echo "I'm just a placeholder" >> "${TFW_IDE_WD}/hello.txt"                         &&\
-    chown -R ${AVATAO_USER}: "${TFW_IDE_WD}" "${TFW_WEBSERVICE_DIR}"     &&\
-    chmod -R 755 "${TFW_IDE_WD}" "${TFW_WEBSERVICE_DIR}"
-
-# Hide TFW related code from user
-RUN chown -R root:root ${TFW_SERVER_DIR} ${TFW_DIR} &&\
-    chmod -R 700 ${TFW_SERVER_DIR} ${TFW_DIR}
-
-# Make AVATAO_USER's home writeable and set it as WORKDIR
-# Make webservice directory writable
-VOLUME ["/home/${AVATAO_USER}", "${TFW_WEBSERVICE_DIR}"]
-WORKDIR /home/${AVATAO_USER}
+VOLUME ["/home/user"]

@@ -16,4 +16,4 @@ class LanguageConfig(LanguageConfigBase):
             "w+",
         ) as requirements:
             for module in module_list:
-                requirements.write(f'{module.get("name")}=={module.get("version")}\n')
+                requirements.write(f'{module.get("name")}{"==" + str(module.get("version")) if module.get("version") else ""}\n')

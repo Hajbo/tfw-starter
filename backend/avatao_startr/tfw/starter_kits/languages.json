@@ -6,10 +6,6 @@
             {
                 "name": "Flask",
                 "folder": "flask"
-            },
-            {
-                "name": "Django",
-                "folder": "django"
             }
         ]
     },
@@ -21,12 +17,6 @@
                 "name": "Express.js",
                 "folder": "express"
             }
-        ]
-    },
-    {
-        "name": "Ruby",
-        "folder": "ruby",
-        "frameworks": [
         ]
     }
 ]

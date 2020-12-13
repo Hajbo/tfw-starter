@@ -2,8 +2,8 @@ import os
 import datetime
 import secrets
 from functools import cached_property
-from avatao_startr.utils import SingletonMeta
 from avatao_startr import config
+from avatao_startr.utils import SingletonMeta
 
 
 class PathHelper(metaclass=SingletonMeta):
@@ -68,7 +68,6 @@ class PathHelper(metaclass=SingletonMeta):
             starter_uuid,
             starter_workdir_folder_name,
             "solvable",
-            "src",
             "webservice",
         )
 

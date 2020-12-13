@@ -1,12 +1,14 @@
 from flask import Flask
 
+from tfwsdk import sdk # If you want to communicate with the TFW from the webservice
+
+
 app = Flask(__name__)
 
+@app.route('/')
+def hello_world():
+    sdk.step(2) # Stepping to state 2
+    return 'Hello, World!'
 
-@app.route("/")
-def index():
-    return "Welcome to the Flask starter app"
-
-
-if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=11111, debug=True)
+if __name__ == '__main__':
+      app.run(host='0.0.0.0', port=11111)
