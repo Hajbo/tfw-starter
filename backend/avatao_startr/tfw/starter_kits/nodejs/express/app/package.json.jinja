@@ -1,0 +1,20 @@
+{% raw %}{
+  "name": "app",
+  "version": "1.0.0",
+  "description": "Avatao StartR express Hello World app",
+  "main": "app.js",
+  "dependencies": {{% endraw %}
+    {%if data -%}
+      {% for dependency in data -%}
+        {{ '\"' +dependency["name"] + '\"' }}: {{ '\"' + dependency['version'] + '\"'}}{{ "," if not loop.last }} 
+      {% endfor -%}
+    {%- endif -%}{% raw %}
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
+  },
+  "author": "",
+  "license": "ISC"
+}{% endraw %}

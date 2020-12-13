@@ -1,0 +1,32 @@
+[
+    {
+        "name": "Python",
+        "folder": "python",
+        "frameworks": [
+            {
+                "name": "Flask",
+                "folder": "flask"
+            },
+            {
+                "name": "Django",
+                "folder": "django"
+            }
+        ]
+    },
+    {
+        "name": "Node.js",
+        "folder": "nodejs",
+        "frameworks": [
+            {
+                "name": "Express.js",
+                "folder": "express"
+            }
+        ]
+    },
+    {
+        "name": "Ruby",
+        "folder": "ruby",
+        "frameworks": [
+        ]
+    }
+]

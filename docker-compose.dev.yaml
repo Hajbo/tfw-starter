@@ -1,0 +1,30 @@
+version: '3.7'
+
+services:
+  backend:
+    container_name: startr-backend-dev
+    restart: always
+    build:
+      context: ./backend
+      dockerfile: Dockerfile.dev
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./backend:/srv/startr
+
+  client:
+    container_name: startr-client-dev
+    restart: always
+    build:
+      context: ./client
+      dockerfile: Dockerfile.dev
+    volumes:
+      - ./client/startr:/srv/startr
+    ports:
+      - '3000:3000'
+    depends_on:
+      - "backend"
+    environment:
+      - NODE_ENV=development
+      - CHOKIDAR_USEPOLLING=true
+

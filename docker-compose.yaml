@@ -9,8 +9,6 @@ services:
       dockerfile: Dockerfile
     ports:
       - "5000:5000"
-    volumes:
-      - ./backend:/usr/src/app
 
   client:
     container_name: starter-client
@@ -18,13 +16,9 @@ services:
     build:
       context: ./client
       dockerfile: Dockerfile
-    volumes:
-      - ./client:/usr/src/client
     ports:
       - '3000:3000'
     depends_on:
       - "backend"
     environment:
-      - NODE_ENV=development
-      - CHOKIDAR_USEPOLLING=true
-
+      - NODE_ENV=production

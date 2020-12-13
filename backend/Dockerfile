@@ -1,29 +1,26 @@
-FROM python:3
+FROM python:3.9.0-buster
 
 RUN apt-get update && \
-    apt-get upgrade -y && \
+    apt-get upgrade -y &&\
     apt-get install -y git
 
-COPY . /usr/src/app
+RUN useradd -ms /bin/bash startr
 
-WORKDIR /usr/src/app
+ENV STARTRDIR=/srv/startr
 
-ENV TFW_STARTER_WORKING_DIRECTORY=/tmp/starter          \
-    TFW_STARTER_SOURCE_DIRECTORY=/usr/src/app/tfw
-    
-ENV TFW_STARTER_TEMPLATE_BASE="${TFW_STARTER_SOURCE_DIRECTORY}/base"                    \
-    TFW_STARTER_LANGUAGE_TEMPLATES_DIRECTORY="${TFW_STARTER_SOURCE_DIRECTORY}/starters" \
-    TFW_STARTER_JINJA_TEMPLATES_DIRECTORY="${TFW_STARTER_SOURCE_DIRECTORY}/templates"
+COPY . /srv/startr
+WORKDIR $STARTRDIR
 
-ENV TFW_STARTER_SUPPORTED_LANGUAGES="${TFW_STARTER_LANGUAGE_TEMPLATES_DIRECTORY}/languages.json"                        \
-    TFW_STARTER_DOCKERFILE_SOURCE="${TFW_STARTER_JINJA_TEMPLATES_DIRECTORY}/Dockerfile.jinja"                          \
-    TFW_STARTER_SUPERVISOR_CONFIG_SOURCE="${TFW_STARTER_JINJA_TEMPLATES_DIRECTORY}/webservice.conf.jinja"              \
-    TFW_STARTER_DOCKERFILE_DESTINATION="${TFW_STARTER_WORKING_DIRECTORY}/solvable/Dockerfile"                           \
-    TFW_STARTER_SUPERVISOR_CONFIG_DESTINATION="${TFW_STARTER_WORKING_DIRECTORY}/solvable/supervisor/webservice.conf"    \
-    TFW_STARTER_WEBSERVICE_DESTINATION="${TFW_STARTER_WORKING_DIRECTORY}/solvable/src/webservice"
+RUN python3 -m pip install -r requirements.txt &&\
+    python3 -m pip install gunicorn==20.0.4 &&\
+    chown -R startr:startr ./ &&\
+    chmod a+x boot.sh
 
+ENV TFW_STARTER_WORKING_DIRECTORY=/tmp/workdir          \
+    TFW_STARTER_SOURCE_DIRECTORY="$STARTRDIR/avatao_startr/tfw" \
+    FLASK_APP=startr.py \
+    FLASK_ENV=production
 
-RUN pip3 install -r requirements.txt
-
-
-CMD ["python", "server.py"]
+USER startr
+EXPOSE 5000
+CMD ["./boot.sh"]
