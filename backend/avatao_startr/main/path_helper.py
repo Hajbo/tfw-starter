@@ -3,12 +3,13 @@ import datetime
 import secrets
 from functools import cached_property
 from avatao_startr.utils import SingletonMeta
+from avatao_startr import config
 
 
 class PathHelper(metaclass=SingletonMeta):
     def __init__(self) -> None:
-        self.starter_workdir = os.environ.get("TFW_STARTER_WORKING_DIRECTORY")
-        self.starter_sourcedir = os.environ.get("TFW_STARTER_SOURCE_DIRECTORY")
+        self.starter_workdir = config.STARTER_WORKDIR
+        self.starter_sourcedir = config.STARTER_SOURCEDIR
 
     @staticmethod
     def generate_workdir_name():
